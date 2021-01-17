@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "981377634125",
+    "project_id": "covidreviews-9d248",
+    "storage_bucket": "covidreviews-9d248.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981377634125:android:12922d9c7caad76c80f104",
+        "android_client_info": {
+          "package_name": "com.example.covid_reviews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981377634125-93pd5nie20tloesvidk6ifb0u3hvonfn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLCRBLDyO79AP-tIEszClv695-CYFwLn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981377634125-93pd5nie20tloesvidk6ifb0u3hvonfn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "981377634125-9v84u78k55j6lvpnv3873l3t7o35n2p6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutter.firebase.covidReviews"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

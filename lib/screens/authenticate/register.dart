@@ -1,21 +1,20 @@
 import 'package:covid_reviews/services/auth.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
-  SignIn({this.toggleView});
+  Register({this.toggleView});
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
   // text field state
   String email = '';
   String password = '';
   String error = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +22,14 @@ class _SignInState extends State<SignIn> {
         appBar: AppBar(
             backgroundColor: Colors.blue,
             elevation: 0.0,
-            title: Text('Sign in to Covid Reviews'),
+            title: Text('Sign up to Covid Reviews'),
             actions: <Widget>[
               FlatButton.icon(
                   onPressed: () {
                     widget.toggleView();
                   },
                   icon: Icon(Icons.person),
-                  label: Text('Register'))
+                  label: Text('Sign in'))
             ]),
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -57,38 +56,21 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                 color: Colors.pink,
                 child: Text(
-                  'Sign in',
+                  'Register',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     dynamic result = await _authService
-                        .signInWithEmailAndPassword(email, password);
+                        .registerWithEmailAndPassword(email, password);
                     if (result == null) {
-                      setState(() => error = 'invalid credntials');
+                      setState(() => error = 'please supply a valid email');
                     }
                   }
                 },
               ),
               SizedBox(height: 12.0),
               Text(error, style: TextStyle(color: Colors.red, fontSize: 14.0)),
-              SizedBox(height: 20.0),
-              RaisedButton(
-                color: Colors.blueAccent,
-                child: Text(
-                  'Guest',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  dynamic result = await _authService.signInAnon();
-                  if (result == null) {
-                    print('Error signing in anon user!');
-                  } else {
-                    print('Anon user signed in');
-                    print(result);
-                  }
-                },
-              )
             ]),
           ),
         ));

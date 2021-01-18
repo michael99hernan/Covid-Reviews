@@ -4,6 +4,11 @@ class AuthService {
   // Firebase auth class. This will be used to interact with the class.
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  // auth change user stream
+  Stream<User> get user {
+    return _auth.authStateChanges();
+  }
+
   // sign in anon
   Future signInAnon() async {
     try {
@@ -20,4 +25,13 @@ class AuthService {
   // register with email and password
 
   // sign out
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      print("Error signing out");
+      return null;
+    }
+  }
 }

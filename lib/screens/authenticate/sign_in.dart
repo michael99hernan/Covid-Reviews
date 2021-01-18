@@ -11,25 +11,52 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(232, 232, 232, 1),
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(213, 216, 219, 1),
+          backgroundColor: Colors.blue,
           elevation: 0.0,
           title: Text('Sign in to Covid Reviews'),
         ),
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-          child: RaisedButton(
-            child: Text('Sign in anon'),
-            onPressed: () async {
-              dynamic result = await _authService.signInAnon();
-              if (result == null) {
-                print('Error signing in anon user');
-              } else {
-                print('Anon user signed in');
-                print(result);
-              }
-            },
+          child: Form(
+            child: Column(children: <Widget>[
+              SizedBox(height: 20.0),
+              TextFormField(
+                onChanged: (val) {},
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                obscureText: true,
+                onChanged: (val) {},
+              ),
+              SizedBox(height: 20.0),
+              RaisedButton(
+                color: Colors.pink,
+                child: Text(
+                  'Sign in',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () async {},
+              ),
+              SizedBox(height: 20.0),
+              RaisedButton(
+                color: Colors.blueAccent,
+                child: Text(
+                  'Guest',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () async {
+                  dynamic result = await _authService.signInAnon();
+                  if (result == null) {
+                    print('Error signing in anon user!');
+                  } else {
+                    print('Anon user signed in');
+                    print(result);
+                  }
+                },
+              )
+            ]),
           ),
         ));
   }

@@ -17,6 +17,7 @@ class AuthService {
       return user;
     } catch (e) {
       print(e.toString());
+      print('Error signing in anon user');
       return null;
     }
   }

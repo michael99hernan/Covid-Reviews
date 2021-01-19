@@ -1,4 +1,5 @@
 import 'package:covid_reviews/services/auth.dart';
+import 'package:covid_reviews/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -6,10 +7,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         title: Text('Covid Reviews'),
-        backgroundColor: Colors.blue,
+        backgroundColor: appBarColor,
         elevation: 0.0,
         actions: <Widget>[
           FlatButton.icon(

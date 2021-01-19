@@ -8,3 +8,6 @@ const textInputDecoration = InputDecoration(
   focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: Colors.pink, width: 2.0)),
 );
+
+const appBarColor = Colors.green;
+const backgroundColor = Colors.white;

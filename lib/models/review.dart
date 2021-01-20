@@ -6,6 +6,7 @@ class Review {
   bool wearMask;
   bool sixFeet;
   bool handSani;
+  String storeName;
   String placeId;
 
   Review(

@@ -9,7 +9,7 @@ class Review {
   bool sixFeet;
   bool handSani;
   String storeName;
-  Uuid placeId;
+  Uuid storeId;
 
   Review(
       {this.authorName,
@@ -19,5 +19,6 @@ class Review {
       this.wearMask,
       this.sixFeet,
       this.handSani,
-      this.placeId});
+      this.storeName,
+      this.storeId});
 }

@@ -27,7 +27,6 @@ class CreateReview extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
-          key: _formKey,
           child: Column(children: <Widget>[
             SizedBox(height: 20.0),
             TextFormField(

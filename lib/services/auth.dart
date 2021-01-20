@@ -9,6 +9,12 @@ class AuthService {
     return _auth.authStateChanges();
   }
 
+  //Init user
+  User initUser() {
+    final user = _auth.currentUser;
+    return user;
+  }
+
   // sign in anon
   Future signInAnon() async {
     try {

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covid_reviews/services/auth.dart';
 import 'package:covid_reviews/shared/appbar.dart';
 import 'package:covid_reviews/shared/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CreateReview extends StatefulWidget {
@@ -10,6 +12,7 @@ class CreateReview extends StatefulWidget {
 
 class _CreateReviewState extends State<CreateReview> {
   final AuthService _authService = AuthService();
+
   final _formKey = GlobalKey<FormState>();
 
   // text field state
@@ -21,7 +24,7 @@ class _CreateReviewState extends State<CreateReview> {
   bool _sixFeet = false;
   bool _handSani = false;
   String _storeName;
-  String _storeId;
+  String _storeId = 'kK0yUEMx9hTLZa9xeSFQ';
 
   List<Widget> getFormWidget() {
     List<Widget> formWidget = new List();
@@ -41,27 +44,28 @@ class _CreateReviewState extends State<CreateReview> {
 
     formWidget.add(SizedBox(height: 10.0));
 
-    //Textbox for store Id
-    formWidget.add(
-      TextFormField(
-        decoration: textInputDecoration.copyWith(hintText: 'Store Id'),
-        validator: (val) => val.length < 6 ? 'Enter a store Id' : null,
-        onChanged: (val) {
-          setState(() => _storeId = val);
-        },
-      ),
-    );
-    formWidget.add(SizedBox(height: 10.0));
+    // //Textbox for store Id
+    // formWidget.add(
+    //   TextFormField(
+
+    //     decoration: textInputDecoration.copyWith(hintText: 'Store Id'),
+    //     validator: (val) => val.isEmpty ? 'Enter a store Id' : null,
+    //     onChanged: (val) {
+    //       setState(() => _storeId = val);
+    //     },
+    //   ),
+    // );
+    // formWidget.add(SizedBox(height: 10.0));
 
     //Textbox for author name
-    formWidget.add(TextFormField(
-      decoration: textInputDecoration.copyWith(hintText: 'Author name'),
-      validator: (val) => val.isEmpty ? 'Enter the author name' : null,
-      onChanged: (val) {
-        setState(() => _authorName = val);
-      },
-    ));
-    formWidget.add(SizedBox(height: 10.0));
+    // formWidget.add(TextFormField(
+    //   decoration: textInputDecoration.copyWith(hintText: 'Author name'),
+    //   validator: (val) => val.isEmpty ? 'Enter the author name' : null,
+    //   onChanged: (val) {
+    //     setState(() => _authorName = val);
+    //   },
+    // ));
+    // formWidget.add(SizedBox(height: 10.0));
 
     //Rating
     formWidget.add(Center(
@@ -147,7 +151,24 @@ class _CreateReviewState extends State<CreateReview> {
               setState(() => _time = DateTime.now());
               print('Submit review button pressed');
               print(_time);
-              // TODO :Put create method here
+              User user = _authService.initUser();
+              _authorName = user.displayName;
+              // TODO: Replace with service call
+              FirebaseFirestore.instance
+                  .collection('stores')
+                  .doc(_storeId)
+                  .collection('reviews')
+                  .add({
+                'authorName': _authorName,
+                'rating': _rating,
+                'text': _text,
+                'datePublished': _time,
+                'wearMask': _wearMask,
+                'sixFeet': _sixFeet,
+                'handSani': _handSani,
+                'storeName': _storeName,
+                'storeId': _storeId,
+              });
             }
           }),
     );

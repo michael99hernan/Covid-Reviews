@@ -1,6 +1,6 @@
 import 'package:covid_reviews/services/auth.dart';
-import 'package:covid_reviews/shared/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:covid_reviews/shared/constants.dart';
 
 final AuthService _authService = AuthService();
 

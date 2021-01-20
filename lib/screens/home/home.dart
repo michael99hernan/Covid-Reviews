@@ -1,4 +1,5 @@
 import 'package:covid_reviews/services/auth.dart';
+import 'package:covid_reviews/shared/appbar.dart';
 import 'package:covid_reviews/shared/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +9,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: AppBar(
-        title: Text('Covid Reviews'),
-        backgroundColor: appBarColor,
-        elevation: 0.0,
-        actions: <Widget>[
+      appBar: customAppBar(
+        "Hello",
+        IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
+        <Widget>[
           FlatButton.icon(
               onPressed: () async {
                 await _authService.signOut();
@@ -20,8 +20,25 @@ class Home extends StatelessWidget {
               icon: Icon(Icons.person),
               label: Text(
                 'sign out',
+                style: TextStyle(color: Colors.black),
               ))
         ],
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            RaisedButton(
+              color: Colors.blue,
+              onPressed: null,
+              child: Text('Create review'),
+            ),
+            RaisedButton(
+              color: Colors.blue,
+              onPressed: null,
+              child: Text('View review'),
+            ),
+          ],
+        ),
       ),
     );
   }

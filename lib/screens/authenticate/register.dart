@@ -1,4 +1,5 @@
 import 'package:covid_reviews/services/auth.dart';
+import 'package:covid_reviews/shared/appbar.dart';
 import 'package:covid_reviews/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_reviews/shared/constants.dart';
@@ -26,18 +27,14 @@ class _RegisterState extends State<Register> {
         ? Loading()
         : Scaffold(
             backgroundColor: backgroundColor,
-            appBar: AppBar(
-                backgroundColor: appBarColor,
-                elevation: 0.0,
-                title: Text('Sign up to Covid Reviews'),
-                actions: <Widget>[
-                  FlatButton.icon(
-                      onPressed: () {
-                        widget.toggleView();
-                      },
-                      icon: Icon(Icons.person),
-                      label: Text('Sign in'))
-                ]),
+            appBar: customAppBar("Sign up", null, <Widget>[
+              FlatButton.icon(
+                  onPressed: () {
+                    widget.toggleView();
+                  },
+                  icon: Icon(Icons.person),
+                  label: Text('Sign in'))
+            ]),
             body: Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
               child: Form(

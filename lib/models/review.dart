@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class Review {
   String authorName;
   double rating;
@@ -6,7 +8,8 @@ class Review {
   bool wearMask;
   bool sixFeet;
   bool handSani;
-  String placeId;
+  String storeName;
+  Uuid placeId;
 
   Review(
       {this.authorName,

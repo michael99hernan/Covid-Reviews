@@ -17,6 +17,7 @@ class _RegisterState extends State<Register> {
   bool loading = false;
 
   // text field state
+  String username = '';
   String email = '';
   String password = '';
   String error = '';
@@ -70,8 +71,9 @@ class _RegisterState extends State<Register> {
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         setState(() => loading = true);
-                        dynamic result = await _authService
-                            .registerWithEmailAndPassword(email, password);
+                        dynamic result =
+                            await _authService.registerWithEmailAndPassword(
+                                email, password, username);
                         if (result == null) {
                           setState(() => error = 'please supply a valid email');
                           loading = false;

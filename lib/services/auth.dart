@@ -15,6 +15,7 @@ class AuthService {
     return user;
   }
 
+  // set display name
   // sign in anon
   Future signInAnon() async {
     try {
@@ -43,11 +44,13 @@ class AuthService {
   }
 
   // register with email and password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(
+      String email, String password, String username) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
+      user.updateProfile(displayName: username);
       return user;
     } catch (e) {
       print(e.toString());

@@ -43,6 +43,15 @@ class _RegisterState extends State<Register> {
                 child: Column(children: <Widget>[
                   SizedBox(height: 20.0),
                   TextFormField(
+                    decoration:
+                        textInputDecoration.copyWith(hintText: 'Username'),
+                    validator: (val) => val.isEmpty ? 'Enter a username' : null,
+                    onChanged: (val) {
+                      setState(() => username = val);
+                    },
+                  ),
+                  SizedBox(height: 20.0),
+                  TextFormField(
                     decoration: textInputDecoration.copyWith(hintText: 'Email'),
                     validator: (val) => val.isEmpty ? 'Enter an email' : null,
                     onChanged: (val) {

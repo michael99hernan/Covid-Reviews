@@ -1,4 +1,5 @@
 import 'package:covid_reviews/services/auth.dart';
+import 'package:covid_reviews/shared/appbar.dart';
 import 'package:covid_reviews/shared/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +46,6 @@ class _CreateReviewState extends State<CreateReview> {
       TextFormField(
         decoration: textInputDecoration.copyWith(hintText: 'Store Id'),
         validator: (val) => val.length < 6 ? 'Enter a store Id' : null,
-        obscureText: true,
         onChanged: (val) {
           setState(() => _storeId = val);
         },
@@ -158,20 +158,10 @@ class _CreateReviewState extends State<CreateReview> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: AppBar(
-        title: Text('Create a review'),
-        backgroundColor: appBarColor,
-        elevation: 0.0,
-        actions: <Widget>[
-          FlatButton.icon(
-              onPressed: () async {
-                await _authService.signOut();
-              },
-              icon: Icon(Icons.person),
-              label: Text(
-                'sign out',
-              ))
-        ],
+      appBar: customAppBar(
+        "Write a Review",
+        null,
+        null,
       ),
       body: Form(
         key: _formKey,

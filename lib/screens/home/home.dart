@@ -1,3 +1,4 @@
+import 'package:covid_reviews/screens/review/create_review.dart';
 import 'package:covid_reviews/services/auth.dart';
 import 'package:covid_reviews/shared/appbar.dart';
 import 'package:covid_reviews/shared/constants.dart';
@@ -11,7 +12,7 @@ class Home extends StatelessWidget {
       backgroundColor: backgroundColor,
       appBar: customAppBar(
         "Hello",
-        IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
+        null,
         <Widget>[
           FlatButton.icon(
               onPressed: () async {
@@ -29,7 +30,13 @@ class Home extends StatelessWidget {
           children: <Widget>[
             RaisedButton(
               color: Colors.blue,
-              onPressed: null,
+              onPressed: () {
+                print('Create review pressed');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CreateReview()),
+                );
+              },
               child: Text('Create review'),
             ),
             RaisedButton(

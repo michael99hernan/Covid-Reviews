@@ -1,3 +1,4 @@
+import 'package:covid_reviews/screens/store/search.dart';
 import 'package:covid_reviews/services/auth.dart';
 import 'package:covid_reviews/shared/appbar.dart';
 import 'package:covid_reviews/shared/constants.dart';
@@ -34,8 +35,13 @@ class Home extends StatelessWidget {
             ),
             RaisedButton(
               color: Colors.blue,
-              onPressed: null,
-              child: Text('View review'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SearchStore()),
+                );
+              },
+              child: Text('Testing Button'),
             ),
           ],
         ),

@@ -57,7 +57,7 @@ class Home extends StatelessWidget {
             RaisedButton(
               color: Colors.blue,
               onPressed: () {
-                print('View a a list of reviews');
+                print('View a list of reviews');
                 Navigator.push(
                   context,
                   // TODO: Replace with a list of reviews page

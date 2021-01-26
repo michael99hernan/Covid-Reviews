@@ -20,11 +20,14 @@ class _StoreReviewsState extends State<StoreReviews> {
 
   // This function is called when the page is loaded
   @override
-  void initState() async {
+  void initState() {
     super
         .initState(); // This calls the original init state (no need to worry about this)
-    reviewList = await _reviewService
-        .listReviewsByStore(storeId); //This gets reviews from database
+    getReviews(); //This gets reviews from database
+  }
+
+  Future<void> getReviews() async {
+    reviewList = await _reviewService.listReviewsByStore(storeId);
   }
 
   @override
@@ -38,7 +41,18 @@ class _StoreReviewsState extends State<StoreReviews> {
       ),
       body: ListView.builder(
         itemCount: reviewList.length,
-        itemBuilder: (context, index) {},
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              // TODO: Once noel is done with code call his page when clicked.
+              // TODO: Add the date
+              // TODO: Add the ratings
+              onTap: () {},
+              title: Text(reviewList[index].authorName),
+              subtitle: Text(reviewList[index].text),
+            ),
+          );
+        },
       ),
     );
   }

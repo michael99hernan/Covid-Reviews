@@ -45,7 +45,7 @@ class ReviewService {
   }
 
   /// Lists all reviews by store which returns a list of reviews
-  Future<void> listReviewsByStore(String storeId) async {
+  Future<List<Review>> listReviewsByStore(String storeId) async {
     try {
       List<Review> reviewList = new List<Review>();
       var list = await db
@@ -78,7 +78,7 @@ class ReviewService {
   }
 
   /// Displays one review and returns the review
-  Future<void> readOneReview(String reviewId, String storeId) async {
+  Future<Review> readOneReview(String reviewId, String storeId) async {
     try {
       var data = await db
           .collection('stores')
@@ -108,7 +108,7 @@ class ReviewService {
   }
 
   /// Updates a review then returns the updating review
-  Future<void> updateReview(
+  Future<Review> updateReview(
       String reviewId, String storeId, Review review) async {
     try {
       db

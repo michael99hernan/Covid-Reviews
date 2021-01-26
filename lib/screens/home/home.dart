@@ -39,13 +39,44 @@ class Home extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => CreateReview()),
                 );
               },
+              child: Text('REPLACE WITH View Review'),
+            ),
+            RaisedButton(
+              color: Colors.blue,
+              onPressed: () {
+                print('View a single review');
+                Navigator.push(
+                  context,
+                  // TODO: Replace with view a review page
+                  MaterialPageRoute(builder: (context) => CreateReview()),
+                );
+              },
+              child: Text('REPLACE WITH List reviews'),
+            ),
+            RaisedButton(
+              color: Colors.blue,
+              onPressed: () {
+                print('View a a list of reviews');
+                Navigator.push(
+                  context,
+                  // TODO: Replace with a list of reviews page
+                  MaterialPageRoute(builder: (context) => CreateReview()),
+                );
+              },
               child: Text('Create review'),
             ),
             RaisedButton(
               color: Colors.blue,
-              onPressed: () =>
-                  reviewService.listReviewsByStore("kK0yUEMx9hTLZa9xeSFQ"),
-              child: Text('View review'),
+              onPressed: () {
+                //test buttons here
+                print('Test button pressed');
+                Navigator.push(
+                  context,
+                  // TODO: Replace with a page you are testing
+                  MaterialPageRoute(builder: (context) => CreateReview()),
+                );
+              },
+              child: Text('Button for test'),
             ),
           ],
         ),

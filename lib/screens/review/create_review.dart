@@ -15,15 +15,23 @@ class _CreateReviewState extends State<CreateReview> {
   final AuthService _authService = AuthService();
   ReviewService reviewService = new ReviewService();
   final _formKey = GlobalKey<FormState>();
-  Review review = new Review(rating: 0.0, authorName: '', text: '', wearMask: false, sixFeet: false, handSani:false, storeId: 'kK0yUEMx9hTLZa9xeSFQ',);
+  // TODO: Store name will automatically be displayed at the top and
+  // store id will be auto put in a hidden field
+  Review review = new Review(
+    rating: 0.0,
+    authorName: '',
+    text: '',
+    wearMask: false,
+    sixFeet: false,
+    handSani: false,
+    storeId: 'kK0yUEMx9hTLZa9xeSFQ',
+  );
   // text field state
 
   List<Widget> getFormWidget() {
     List<Widget> formWidget = new List();
 
     formWidget.add(SizedBox(height: 10.0));
-    // TODO: Store name will automatically be displayed at the top and
-    // store id will be auto put in a hidden field
 
     //Textbox for store name
     formWidget.add(TextFormField(
@@ -35,29 +43,6 @@ class _CreateReviewState extends State<CreateReview> {
     ));
 
     formWidget.add(SizedBox(height: 10.0));
-
-    // //Textbox for store Id
-    // formWidget.add(
-    //   TextFormField(
-
-    //     decoration: textInputDecoration.copyWith(hintText: 'Store Id'),
-    //     validator: (val) => val.isEmpty ? 'Enter a store Id' : null,
-    //     onChanged: (val) {
-    //       setState(() => _storeId = val);
-    //     },
-    //   ),
-    // );
-    // formWidget.add(SizedBox(height: 10.0));
-
-    //Textbox for author name
-    // formWidget.add(TextFormField(
-    //   decoration: textInputDecoration.copyWith(hintText: 'Author name'),
-    //   validator: (val) => val.isEmpty ? 'Enter the author name' : null,
-    //   onChanged: (val) {
-    //     setState(() => _authorName = val);
-    //   },
-    // ));
-    // formWidget.add(SizedBox(height: 10.0));
 
     //Rating
     formWidget.add(Center(
@@ -128,9 +113,6 @@ class _CreateReviewState extends State<CreateReview> {
       ),
     );
 
-    // TODO : Send the form to the firestore. This will be done by calling the review service create method
-    // the onpressed will have to be changed to an async method
-
     formWidget.add(
       RaisedButton(
           color: Colors.green,
@@ -157,7 +139,7 @@ class _CreateReviewState extends State<CreateReview> {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: customAppBar(
-        "Write a Review",
+        'Write a Review',
         null,
         null,
       ),

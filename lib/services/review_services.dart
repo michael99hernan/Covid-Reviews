@@ -75,6 +75,7 @@ class ReviewService {
       print(exception.toString());
       print('Error occurred while listing all reviews by one store');
     }
+    return null;
   }
 
   /// Displays one review and returns the review
@@ -105,6 +106,7 @@ class ReviewService {
       print(exception.toString());
       print('Error occurred while listing one review');
     }
+    return null;
   }
 
   /// Updates a review then returns the updating review
@@ -136,5 +138,6 @@ class ReviewService {
       print(exception.toString());
       print('error occurred while updating review');
     }
+    return null;
   }
 }

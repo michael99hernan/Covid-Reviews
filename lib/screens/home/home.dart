@@ -1,4 +1,5 @@
 import 'package:covid_reviews/screens/review/create_review.dart';
+import 'package:covid_reviews/screens/review/list_store_reviews.dart';
 import 'package:covid_reviews/services/auth.dart';
 import 'package:covid_reviews/shared/appbar.dart';
 import 'package:covid_reviews/shared/constants.dart';
@@ -60,10 +61,10 @@ class Home extends StatelessWidget {
                 Navigator.push(
                   context,
                   // TODO: Replace with a list of reviews page
-                  MaterialPageRoute(builder: (context) => CreateReview()),
+                  MaterialPageRoute(builder: (context) => StoreReviews()),
                 );
               },
-              child: Text('Create review'),
+              child: Text('List Reviews'),
             ),
             RaisedButton(
               color: Colors.blue,

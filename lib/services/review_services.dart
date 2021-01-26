@@ -6,6 +6,7 @@ class ReviewService {
 
   /// Adds a review to the firestore
   Future<void> addReview(Review review) async {
+    if (review.authorName == null) review.authorName = "Guest";
     try {
       db.collection('stores').doc(review.storeId).collection('reviews').add(({
             'authorName': review.authorName,

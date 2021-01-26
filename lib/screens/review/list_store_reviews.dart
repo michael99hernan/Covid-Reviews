@@ -1,6 +1,8 @@
 //This is where you will build a list of reviews
 import 'package:covid_reviews/models/review.dart';
 import 'package:covid_reviews/services/review_services.dart';
+import 'package:covid_reviews/shared/appbar.dart';
+import 'package:covid_reviews/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class StoreReviews extends StatefulWidget {
@@ -27,6 +29,17 @@ class _StoreReviewsState extends State<StoreReviews> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: customAppBar(
+        'Reviews',
+        null,
+        null,
+      ),
+      body: ListView.builder(
+        itemCount: reviewList.length,
+        itemBuilder: (context, index) {},
+      ),
+    );
   }
 }

@@ -2,6 +2,7 @@ import 'package:covid_reviews/screens/review/create_review.dart';
 import 'package:covid_reviews/services/auth.dart';
 import 'package:covid_reviews/shared/appbar.dart';
 import 'package:covid_reviews/shared/constants.dart';
+import 'package:covid_reviews/screens/review/reviews.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_reviews/services/review_services.dart';
 
@@ -68,15 +69,12 @@ class Home extends StatelessWidget {
             RaisedButton(
               color: Colors.blue,
               onPressed: () {
-                //test buttons here
-                print('Test button pressed');
                 Navigator.push(
                   context,
-                  // TODO: Replace with a page you are testing
-                  MaterialPageRoute(builder: (context) => CreateReview()),
+                  MaterialPageRoute(builder: (context) => Review()),
                 );
               },
-              child: Text('Button for test'),
+              child: Text('View review'),
             ),
           ],
         ),

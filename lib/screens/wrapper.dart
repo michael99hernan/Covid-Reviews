@@ -1,8 +1,8 @@
-import 'package:covid_reviews/screens/review/create_review.dart';
+import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+
 import 'authenticate/authenticate.dart';
-import 'package:flutter/material.dart';
 import 'home/home.dart';
 
 class Wrapper extends StatelessWidget {
@@ -14,7 +14,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return CreateReview();
+      return Home();
     }
   }
 }

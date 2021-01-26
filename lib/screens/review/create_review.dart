@@ -1,5 +1,9 @@
+import 'package:covid_reviews/models/review.dart';
 import 'package:covid_reviews/services/auth.dart';
+import 'package:covid_reviews/services/review_services.dart';
+import 'package:covid_reviews/shared/appbar.dart';
 import 'package:covid_reviews/shared/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CreateReview extends StatefulWidget {
@@ -9,18 +13,10 @@ class CreateReview extends StatefulWidget {
 
 class _CreateReviewState extends State<CreateReview> {
   final AuthService _authService = AuthService();
+  ReviewService reviewService = new ReviewService();
   final _formKey = GlobalKey<FormState>();
-
+  Review review = new Review(rating: 0.0, authorName: '', text: '', wearMask: false, sixFeet: false, handSani:false, storeId: 'kK0yUEMx9hTLZa9xeSFQ',);
   // text field state
-  String _authorName;
-  double _rating = 0.0;
-  String _text;
-  DateTime _time;
-  bool _wearMask = false;
-  bool _sixFeet = false;
-  bool _handSani = false;
-  String _storeName;
-  String _storeId;
 
   List<Widget> getFormWidget() {
     List<Widget> formWidget = new List();
@@ -34,34 +30,34 @@ class _CreateReviewState extends State<CreateReview> {
       decoration: textInputDecoration.copyWith(hintText: 'Store name'),
       validator: (val) => val.isEmpty ? 'Enter the store name' : null,
       onChanged: (val) {
-        setState(() => _storeName = val);
+        setState(() => review.storeName = val);
       },
     ));
 
     formWidget.add(SizedBox(height: 10.0));
 
-    //Textbox for store Id
-    formWidget.add(
-      TextFormField(
-        decoration: textInputDecoration.copyWith(hintText: 'Store Id'),
-        validator: (val) => val.length < 6 ? 'Enter a store Id' : null,
-        obscureText: true,
-        onChanged: (val) {
-          setState(() => _storeId = val);
-        },
-      ),
-    );
-    formWidget.add(SizedBox(height: 10.0));
+    // //Textbox for store Id
+    // formWidget.add(
+    //   TextFormField(
+
+    //     decoration: textInputDecoration.copyWith(hintText: 'Store Id'),
+    //     validator: (val) => val.isEmpty ? 'Enter a store Id' : null,
+    //     onChanged: (val) {
+    //       setState(() => _storeId = val);
+    //     },
+    //   ),
+    // );
+    // formWidget.add(SizedBox(height: 10.0));
 
     //Textbox for author name
-    formWidget.add(TextFormField(
-      decoration: textInputDecoration.copyWith(hintText: 'Author name'),
-      validator: (val) => val.isEmpty ? 'Enter the author name' : null,
-      onChanged: (val) {
-        setState(() => _authorName = val);
-      },
-    ));
-    formWidget.add(SizedBox(height: 10.0));
+    // formWidget.add(TextFormField(
+    //   decoration: textInputDecoration.copyWith(hintText: 'Author name'),
+    //   validator: (val) => val.isEmpty ? 'Enter the author name' : null,
+    //   onChanged: (val) {
+    //     setState(() => _authorName = val);
+    //   },
+    // ));
+    // formWidget.add(SizedBox(height: 10.0));
 
     //Rating
     formWidget.add(Center(
@@ -71,14 +67,14 @@ class _CreateReviewState extends State<CreateReview> {
       ),
     ));
     formWidget.add(Slider(
-        value: _rating,
+        value: review.rating,
         divisions: 5,
         min: 0,
         max: 5,
-        label: _rating.round().toString(),
+        label: review.rating.round().toString(),
         onChanged: (double val) {
           setState(() {
-            _rating = val;
+            review.rating = val;
           });
         }));
 
@@ -87,10 +83,10 @@ class _CreateReviewState extends State<CreateReview> {
     //Checkbox for wear mask
     formWidget.add(CheckboxListTile(
       title: Text('Do employees wear mask?'),
-      value: _wearMask,
+      value: review.wearMask,
       onChanged: (bool val) {
         setState(() {
-          _wearMask = val;
+          review.wearMask = val;
         });
       },
     ));
@@ -98,10 +94,10 @@ class _CreateReviewState extends State<CreateReview> {
     //Checkbox for six feet signs
     formWidget.add(CheckboxListTile(
       title: Text('Does store have six feet signs?'),
-      value: _sixFeet,
+      value: review.sixFeet,
       onChanged: (bool val) {
         setState(() {
-          _sixFeet = val;
+          review.sixFeet = val;
         });
       },
     ));
@@ -109,10 +105,10 @@ class _CreateReviewState extends State<CreateReview> {
     //Checkbox for hand sani
     formWidget.add(CheckboxListTile(
       title: Text('Do store have hand sanitizer?'),
-      value: _handSani,
+      value: review.handSani,
       onChanged: (bool val) {
         setState(() {
-          _handSani = val;
+          review.handSani = val;
         });
       },
     ));
@@ -127,7 +123,7 @@ class _CreateReviewState extends State<CreateReview> {
         decoration: textInputDecoration.copyWith(hintText: 'Review'),
         validator: (val) => val.isEmpty ? 'Enter a review for the store' : null,
         onChanged: (val) {
-          setState(() => _text = val);
+          setState(() => review.text = val);
         },
       ),
     );
@@ -144,10 +140,12 @@ class _CreateReviewState extends State<CreateReview> {
           ),
           onPressed: () {
             if (_formKey.currentState.validate()) {
-              setState(() => _time = DateTime.now());
+              setState(() => review.time = DateTime.now());
               print('Submit review button pressed');
-              print(_time);
-              // TODO :Put create method here
+              print(review.time);
+              User user = _authService.initUser();
+              review.authorName = user.displayName;
+              reviewService.addReview(review);
             }
           }),
     );
@@ -158,20 +156,10 @@ class _CreateReviewState extends State<CreateReview> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: AppBar(
-        title: Text('Create a review'),
-        backgroundColor: appBarColor,
-        elevation: 0.0,
-        actions: <Widget>[
-          FlatButton.icon(
-              onPressed: () async {
-                await _authService.signOut();
-              },
-              icon: Icon(Icons.person),
-              label: Text(
-                'sign out',
-              ))
-        ],
+      appBar: customAppBar(
+        "Write a Review",
+        null,
+        null,
       ),
       body: Form(
         key: _formKey,

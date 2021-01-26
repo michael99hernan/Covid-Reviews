@@ -1,8 +1,5 @@
-import 'package:covid_reviews/services/auth.dart';
-import 'package:covid_reviews/shared/constants.dart';
 import 'package:flutter/material.dart';
-
-final AuthService _authService = AuthService();
+import 'package:covid_reviews/shared/constants.dart';
 
 Widget customAppBar(String text, IconButton iconButton, List<Widget> actions) {
   Widget iconWidget;
